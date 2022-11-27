@@ -27,12 +27,16 @@ export function MovieDetail() {
     <Container>
       <Box display="flexbox">
         {' '}
-        <img
-          src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-          alt={`Poster for movie ${title ?? original_title}`}
-          width="300"
-        />
-        <Box ml={3} p={4} width="normal">
+        {poster_path ? (
+          <img
+            src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+            alt={`Poster for movie ${title ?? original_title}`}
+            width="300"
+          />
+        ) : (
+          <Box width="normal" height="wide" bg="grey" />
+        )}
+        <Box ml={3} p={4} width="wide">
           {' '}
           <h2>{title ?? original_title}</h2>
           <p>User score: {Math.ceil(vote_average * 10)}%</p>
