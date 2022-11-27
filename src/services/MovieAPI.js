@@ -23,10 +23,25 @@ export async function getTrendingMovies() {
 export async function getMovieDetailByID(ID) {
   let response = null;
 
+  //try to fetch movie`s data
   try {
     response = await axios(`movie/${ID}?api_key=${API_KEY}`);
   } catch (error) {
-    console.log(`Error! Server responded with status: ${response?.status}. 
+    if (error.code !== 'ERR_BAD_REQUEST') {
+      console.log(`Error! Server responded with status: ${error.code}. 
+    Error message: ${error.message}`);
+
+      return null;
+    }
+  }
+  //fetched successfully return response`s data
+  if (response) return response.data;
+
+  //else try to fetch tv series` data
+  try {
+    response = await axios(`tv/${ID}?api_key=${API_KEY}`);
+  } catch (error) {
+    console.log(`Error! Server responded with status: ${error.code}. 
     Error message: ${error.message}`);
 
     return null;
