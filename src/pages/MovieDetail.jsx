@@ -2,7 +2,7 @@ import { Box, Container } from 'components/common/shared.styled';
 import { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
-import { getMovieDetailByID } from 'services/MovieAPI';
+import { getMovieDetailsByID } from 'services/MovieAPI';
 
 const LINKS = [
   { name: 'Cast', to: 'cast' },
@@ -16,7 +16,7 @@ export function MovieDetail() {
 
   useEffect(() => {
     async function getMovieDetails() {
-      setMovieDetails(await getMovieDetailByID(movieId));
+      setMovieDetails(await getMovieDetailsByID(movieId));
     }
 
     getMovieDetails();

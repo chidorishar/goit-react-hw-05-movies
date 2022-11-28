@@ -16,36 +16,59 @@ export async function getTrendingMovies() {
     return;
   }
 
-  console.log(response.data);
   return response.data.results;
 }
 
-export async function getMovieDetailByID(ID) {
+export async function getMovieDetailsByID(ID) {
+  const requests = [
+    `movie/${ID}?api_key=${API_KEY}`,
+    `tv/${ID}?api_key=${API_KEY}`,
+  ];
+
+  const response = await getMovieDetails(requests);
+
+  return response?.data;
+}
+
+export async function getMovieReviewsByID(ID) {
+  const requests = [
+    `movie/${ID}/reviews?api_key=${API_KEY}`,
+    `tv/${ID}/reviews?api_key=${API_KEY}`,
+  ];
+
+  const response = await getMovieDetails(requests);
+
+  return response?.data?.results;
+}
+
+export async function getMovieCastByID(ID) {
+  const requests = [
+    `movie/${ID}/credits?api_key=${API_KEY}`,
+    `tv/${ID}/credits?api_key=${API_KEY}`,
+  ];
+
+  const response = await getMovieDetails(requests);
+
+  return response?.data;
+}
+
+async function getMovieDetails(requests) {
   let response = null;
 
-  //try to fetch movie`s data
-  try {
-    response = await axios(`movie/${ID}?api_key=${API_KEY}`);
-  } catch (error) {
-    if (error.code !== 'ERR_BAD_REQUEST') {
-      console.log(`Error! Server responded with status: ${error.code}. 
-    Error message: ${error.message}`);
+  for (const request of requests) {
+    try {
+      response = await axios(request);
+      if (response) break;
+    } catch (error) {
+      if (error.code !== 'ERR_BAD_REQUEST') {
+        console.log(
+          `Error! Server responded with status: ${error.code}. Error message: ${error.message}`
+        );
 
-      return null;
+        return null;
+      }
     }
   }
-  //fetched successfully return response`s data
-  if (response) return response.data;
 
-  //else try to fetch tv series` data
-  try {
-    response = await axios(`tv/${ID}?api_key=${API_KEY}`);
-  } catch (error) {
-    console.log(`Error! Server responded with status: ${error.code}. 
-    Error message: ${error.message}`);
-
-    return null;
-  }
-
-  return response.data;
+  return response;
 }
