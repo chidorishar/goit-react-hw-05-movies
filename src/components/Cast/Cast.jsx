@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Box, Section } from 'components/common/shared.styled';
-
 import { getMovieCastByID } from 'services/MovieAPI';
+
+import { Box, Section } from 'components/common/shared.styled';
+import { CastCard, CastCardsContainer, PersonPhoto } from './Cast.styled';
 
 export default function Cast() {
   const { movieId } = useParams();
@@ -22,25 +23,29 @@ export default function Cast() {
 
   return (
     <Section>
-      <ul>
+      <CastCardsContainer>
         {movieCast.length
           ? movieCast.map(({ name, character, profile_path, id }) => (
-              <li key={id}>
+              <CastCard key={id}>
                 {profile_path ? (
-                  <img
+                  <PersonPhoto
                     src={`https://image.tmdb.org/t/p/w300/${profile_path}`}
                     alt={`${name}`}
                     width="150"
                   />
                 ) : (
-                  <Box width="150px" height="200px" bg="grey" />
+                  <Box width="150px" height="100%" bg="grey" flexShrink="0" />
                 )}
-                <p>{name}</p>
-                <p>Character: {character}</p>
-              </li>
+                <Box ml={2} p={2} pt={3}>
+                  <p>
+                    <b>{name}</b>
+                  </p>
+                  <p>Character: {character}</p>
+                </Box>
+              </CastCard>
             ))
           : 'We don`t have any data about cast for this movie!'}
-      </ul>
+      </CastCardsContainer>
     </Section>
   );
 }

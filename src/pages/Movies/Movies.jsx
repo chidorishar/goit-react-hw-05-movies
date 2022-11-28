@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
-import { Container } from 'components/common/shared.styled';
 import { MoviesList } from 'components/common/MoviesList/MoviesList';
 
 import { getMoviesByName } from 'services/MovieAPI';
+
+import { Box, Container, MainWrapper } from 'components/common/shared.styled';
+import { SearchButton, SearchForm, SearchInput } from './Movies.styled';
 
 const SEARCH_QUERY_PARAM_KEY = 'query';
 
@@ -39,15 +41,21 @@ export default function Movies() {
 
   return (
     <Container>
-      <main>
-        <form onSubmit={onSearchFormSubmit}>
-          <input type="text" name="searchQuery" placeholder="Movie name" />
-          <button type="submit">Search</button>
-        </form>
+      <MainWrapper>
+        <SearchForm onSubmit={onSearchFormSubmit}>
+          <Box display="flex">
+            <SearchInput
+              type="text"
+              name="searchQuery"
+              placeholder="Movie name"
+            />
+            <SearchButton type="submit">Search</SearchButton>
+          </Box>
+        </SearchForm>
         {foundedMovies && (
           <MoviesList moviesData={foundedMovies} location={location} />
         )}
-      </main>
+      </MainWrapper>
     </Container>
   );
 }

@@ -1,16 +1,26 @@
 import { Suspense, useEffect, useState } from 'react';
-import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
-
-import { Box, Container } from 'components/common/shared.styled';
+import { Outlet, useLocation, useParams } from 'react-router-dom';
 
 import { getMovieDetailsByID } from 'services/MovieAPI';
+
+import { Box, Container } from 'components/common/shared.styled';
+import {
+  AdditionalInfoHeader,
+  AdditionalInfoItem,
+  AdditionalInfoLink,
+  AdditionalInfoLinks,
+  ImageThumb,
+  MainStyled,
+  PosterImg,
+  ReturnButton,
+} from './MovieDetails.styled';
 
 const LINKS = [
   { name: 'Cast', to: 'cast' },
   { name: 'Reviews', to: 'reviews' },
 ];
 
-export default function MovieDetail() {
+export default function MovieDetails() {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const location = useLocation();
@@ -43,21 +53,24 @@ export default function MovieDetail() {
 
   return (
     <Container>
-      <main>
-        {' '}
-        <Link to={location.state?.from ?? '/'}>Go back</Link>
+      <MainStyled>
         {/* GENERAL INFO */}
-        <Box display="flexbox" mb={3}>
-          {poster_path ? (
-            <img
-              src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-              alt={`Poster for movie ${movieName}`}
-              width="300"
-            />
-          ) : (
-            <Box width="normal" height="wide" bg="grey" />
-          )}
-          <Box ml={3} p={4} width="wide">
+        <Box display="flex" mb={4} justifyContent="center">
+          <ImageThumb>
+            {poster_path ? (
+              <PosterImg
+                src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
+                alt={`Poster for movie ${movieName}`}
+                width="300"
+              />
+            ) : (
+              <Box width="normal" height="wide" bg="grey" />
+            )}
+          </ImageThumb>
+          <Box ml={3} p={4} width="wide" position="relative">
+            <ReturnButton to={location.state?.from ?? '/'}>
+              Go back
+            </ReturnButton>
             <h2>{movieName}</h2>
             <p>User score: {Math.ceil(vote_average * 10)}%</p>
             <h3>Overview</h3>
@@ -67,20 +80,22 @@ export default function MovieDetail() {
           </Box>
         </Box>
         {/* ADDITIONAL INFO */}
-        <Box>
-          {' '}
-          <p>Additional info</p>
-          <ul>
+        <Box mb={2}>
+          <AdditionalInfoHeader>Additional info</AdditionalInfoHeader>
+          <AdditionalInfoLinks>
             {LINKS.map(({ to, name }) => (
-              <li key={name}>
-                <Link to={to} state={{ from: location.state?.from ?? '/' }}>
+              <AdditionalInfoItem key={name}>
+                <AdditionalInfoLink
+                  to={to}
+                  state={{ from: location.state?.from ?? '/' }}
+                >
                   {name}
-                </Link>
-              </li>
+                </AdditionalInfoLink>
+              </AdditionalInfoItem>
             ))}
-          </ul>
+          </AdditionalInfoLinks>
         </Box>
-      </main>
+      </MainStyled>
 
       {/* CHILDREN */}
       <Suspense fallback={<div>Loading...</div>}>

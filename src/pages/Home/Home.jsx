@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { Container } from 'components/common/shared.styled';
+import { Container, MainWrapper } from 'components/common/shared.styled';
 import { MoviesList } from 'components/common/MoviesList/MoviesList';
 
 import { getTrendingMovies } from 'services/MovieAPI';
+import { Title } from './Home.styled';
 
 export default function Home() {
   const [moviesData, setMoviesData] = useState(null);
@@ -19,13 +20,12 @@ export default function Home() {
 
   return (
     <Container>
-      <main>
-        {' '}
-        <h2>Trending today</h2>
+      <MainWrapper>
+        <Title>Trending today</Title>
         {moviesData && (
           <MoviesList moviesData={moviesData} location={location} />
         )}
-      </main>
+      </MainWrapper>
     </Container>
   );
 }

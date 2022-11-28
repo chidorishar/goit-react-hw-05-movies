@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { getMovieReviewsByID } from 'services/MovieAPI';
+import { AuthorNickname, ReviewsListItem, ReviewText } from './Reviews.styled';
 
 export default function Reviews() {
   const { movieId } = useParams();
@@ -24,12 +25,10 @@ export default function Reviews() {
       <ul>
         {movieReviews.length
           ? movieReviews.map(({ author, content, id }) => (
-              <li key={id}>
-                <p>
-                  <b>Author: {author}</b>
-                </p>
-                <p>{content}</p>
-              </li>
+              <ReviewsListItem key={id}>
+                <AuthorNickname>Author: {author}</AuthorNickname>
+                <ReviewText>{content}</ReviewText>
+              </ReviewsListItem>
             ))
           : 'We don`t have any reviews for this movie!'}
       </ul>

@@ -4,8 +4,9 @@ export const theme = {
     smallDashed: '1px dashed',
   },
   colors: {
-    accent: '#00b984',
-    accentSecondary: '#5c91f9',
+    accent: '#f76f00',
+    accentSecondary: '#4b86fba2',
+    background: '#64c931a8',
     textColored: '#4483b5',
     textColoredSecondary: '#6ab544',
     light: '#ececec',
@@ -35,7 +36,8 @@ export const theme = {
     buttonInset: 'inset 0px 1px 8px 0px #b1b1b196',
     inputInset: 'inset 0px 2px 4px 0px #00000040',
     inputInsetWarning: 'inset 0px 2px 4px 0px #ff7777',
-    small: '3px 5px 9px 0px #b6b6b6',
+    nano: '1px 1px 3px 0px #b6b6b69f',
+    small: '1px 1px 9px 0px #b6b6b6',
     medium: '2px 10px 20px #b6b6b6',
   },
   transitions: {
