@@ -15,7 +15,7 @@ export const ReviewsListItem = styled.li`
 
 export const AuthorNickname = styled.p`
   font-size: ${({ theme: { fontSizes } }) => fontSizes[2]}px;
-  font-weight: ${({ theme: { fontWeights } }) => fontWeights.medium};
+  font-weight: ${({ theme: { fontWeights } }) => fontWeights.bold};
 
   margin-bottom: ${({ theme: { space } }) => space[2]}px;
 `;
