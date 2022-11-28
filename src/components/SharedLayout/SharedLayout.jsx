@@ -1,6 +1,12 @@
 import { Container } from 'components/common/shared.styled';
 import { Outlet } from 'react-router-dom';
-import { Header, HeaderLink, LinksList } from './SharedLayout.styled';
+
+import {
+  Header,
+  HeaderLink,
+  LinksList,
+  LinksListItem,
+} from './SharedLayout.styled';
 
 const LINKS = [
   { name: 'Home', to: '/' },
@@ -14,9 +20,9 @@ export function SharedLayout(props) {
         <Container>
           <LinksList>
             {LINKS.map(({ to, name }) => (
-              <HeaderLink to={to} key={name}>
-                {name}
-              </HeaderLink>
+              <LinksListItem key={name}>
+                <HeaderLink to={to}>{name}</HeaderLink>
+              </LinksListItem>
             ))}
           </LinksList>
         </Container>

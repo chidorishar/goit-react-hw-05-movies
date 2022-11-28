@@ -18,14 +18,18 @@ export const LinksList = styled.ul`
   background-color: ${({ theme: { colors } }) => colors.light};
 `;
 
-export const HeaderLink = styled(NavLink)`
-  font-size: ${({ theme: { fontSizes } }) => fontSizes[4]}px;
-  font-weight: ${({ theme: { fontWeights } }) => fontWeights.medium};
-  color: black;
+export const LinksListItem = styled.li`
+  display: inline-block;
 
   &:not(:last-child) {
     margin-right: ${({ theme: { space } }) => space[3]}px;
   }
+`;
+
+export const HeaderLink = styled(NavLink)`
+  font-size: ${({ theme: { fontSizes } }) => fontSizes[4]}px;
+  font-weight: ${({ theme: { fontWeights } }) => fontWeights.medium};
+  color: black;
 
   &.active {
     color: ${({ theme: { colors } }) => colors.textColored};
