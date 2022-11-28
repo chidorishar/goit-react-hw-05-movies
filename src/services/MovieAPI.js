@@ -5,16 +5,17 @@ const API_KEY = 'a7cdca3ac9a73d688c9dec2c3c2e067b';
 axios.defaults.baseURL = 'https://api.themoviedb.org/3';
 
 export async function getTrendingMovies() {
-  let response = null;
+  const response = await getDataByRequest(
+    `trending/all/day?api_key=${API_KEY}`
+  );
 
-  try {
-    response = await axios(`trending/all/day?api_key=${API_KEY}`);
-  } catch (error) {
-    console.log(`Error! Server responded with status: ${response?.status}. 
-    Error message: ${error.message}`);
+  return response.data.results;
+}
 
-    return;
-  }
+export async function getMoviesByName(name) {
+  const response = await getDataByRequest(
+    `search/movie?api_key=${API_KEY}&query=${name}`
+  );
 
   return response.data.results;
 }
@@ -56,18 +57,23 @@ async function getMovieDetails(requests) {
   let response = null;
 
   for (const request of requests) {
-    try {
-      response = await axios(request);
-      if (response) break;
-    } catch (error) {
-      if (error.code !== 'ERR_BAD_REQUEST') {
-        console.log(
-          `Error! Server responded with status: ${error.code}. Error message: ${error.message}`
-        );
+    response = await getDataByRequest(request);
+    if (response) break;
+  }
 
-        return null;
-      }
-    }
+  return response;
+}
+
+async function getDataByRequest(request) {
+  let response = null;
+
+  try {
+    response = await axios(request);
+  } catch (error) {
+    console.log(`Error! Server responded with status: ${error.code}. 
+    Error message: ${error.message}`);
+
+    return null;
   }
 
   return response;
