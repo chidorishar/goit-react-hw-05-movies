@@ -32,7 +32,7 @@ export function MovieDetail() {
   const movieGenresNames = genres?.map(
     ({ name }, index) => name + (index !== genres.length - 1 ? ', ' : '')
   );
-  console.log(movieGenresNames);
+  const movieName = title ?? original_title ?? original_name ?? 'No data!';
 
   return (
     <Container>
@@ -41,7 +41,7 @@ export function MovieDetail() {
         {poster_path ? (
           <img
             src={`https://image.tmdb.org/t/p/w500/${poster_path}`}
-            alt={`Poster for movie ${title ?? original_title}`}
+            alt={`Poster for movie ${movieName}`}
             width="300"
           />
         ) : (
@@ -49,7 +49,7 @@ export function MovieDetail() {
         )}
         <Box ml={3} p={4} width="wide">
           {' '}
-          <h2>{title ?? original_title}</h2>
+          <h2>{movieName}</h2>
           <p>User score: {Math.ceil(vote_average * 10)}%</p>
           <h3>Overview</h3>
           <p>{overview}</p>
