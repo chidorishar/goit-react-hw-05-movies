@@ -13,7 +13,7 @@ const LINKS = [
   { name: 'Movies', to: 'movies' },
 ];
 
-export function SharedLayout(props) {
+export function SharedLayout() {
   return (
     <>
       <Header>

@@ -39,13 +39,15 @@ export function Movies() {
 
   return (
     <Container>
-      <form onSubmit={onSearchFormSubmit}>
-        <input name="searchQuery" />
-        <button type="submit">Search</button>
-      </form>
-      {foundedMovies && (
-        <MoviesList moviesData={foundedMovies} location={location} />
-      )}
+      <main>
+        <form onSubmit={onSearchFormSubmit}>
+          <input type="text" name="searchQuery" placeholder="Movie name" />
+          <button type="submit">Search</button>
+        </form>
+        {foundedMovies && (
+          <MoviesList moviesData={foundedMovies} location={location} />
+        )}
+      </main>
     </Container>
   );
 }

@@ -1,3 +1,4 @@
+import { Section } from 'components/common/shared.styled';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -19,17 +20,19 @@ export function Reviews() {
   if (!movieReviews) return null;
 
   return (
-    <ul>
-      {movieReviews.length
-        ? movieReviews.map(({ author, content, id }) => (
-            <li key={id}>
-              <p>
-                <b>Author: {author}</b>
-              </p>
-              <p>{content}</p>
-            </li>
-          ))
-        : 'We don`t have any reviews for this movie!'}
-    </ul>
+    <Section>
+      <ul>
+        {movieReviews.length
+          ? movieReviews.map(({ author, content, id }) => (
+              <li key={id}>
+                <p>
+                  <b>Author: {author}</b>
+                </p>
+                <p>{content}</p>
+              </li>
+            ))
+          : 'We don`t have any reviews for this movie!'}
+      </ul>
+    </Section>
   );
 }

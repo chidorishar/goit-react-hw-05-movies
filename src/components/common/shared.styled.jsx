@@ -9,3 +9,7 @@ export const Container = styled.div`
   margin: 0 auto;
   padding: 0 16px;
 `;
+
+export const Section = styled.section`
+  padding: ${({ theme: { space } }) => space[4]}px;
+`;

@@ -19,8 +19,13 @@ export function Home() {
 
   return (
     <Container>
-      <h2>Trending today</h2>
-      {moviesData && <MoviesList moviesData={moviesData} location={location} />}
+      <main>
+        {' '}
+        <h2>Trending today</h2>
+        {moviesData && (
+          <MoviesList moviesData={moviesData} location={location} />
+        )}
+      </main>
     </Container>
   );
 }
