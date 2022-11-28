@@ -16,8 +16,19 @@ export function MovieDetail() {
     getMovieDetails();
   }, [movieId]);
 
-  const { title, original_title, poster_path, vote_average, overview, genres } =
-    movieDetails ?? {};
+  //no data - no markup
+  if (!movieDetails) return null;
+
+  //else render details
+  const {
+    title,
+    original_title,
+    original_name,
+    poster_path,
+    vote_average,
+    overview,
+    genres,
+  } = movieDetails ?? {};
   const movieGenresNames = genres?.map(
     ({ name }, index) => name + (index !== genres.length - 1 ? ', ' : '')
   );
