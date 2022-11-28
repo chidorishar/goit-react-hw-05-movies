@@ -73,7 +73,9 @@ export function MovieDetail() {
         <ul>
           {LINKS.map(({ to, name }) => (
             <li key={name}>
-              <Link to={to}>{name}</Link>
+              <Link to={to} state={{ from: location.state?.from ?? '/' }}>
+                {name}
+              </Link>
             </li>
           ))}
         </ul>
