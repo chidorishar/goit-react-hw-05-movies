@@ -49,7 +49,7 @@ export async function getMovieCastByID(ID) {
 
   const response = await getMovieDetails(requests);
 
-  return response?.data;
+  return response?.data?.cast;
 }
 
 async function getMovieDetails(requests) {

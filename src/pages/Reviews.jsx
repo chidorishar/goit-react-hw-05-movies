@@ -20,7 +20,7 @@ export function Reviews() {
 
   return (
     <ul>
-      {movieReviews.length > 0
+      {movieReviews.length
         ? movieReviews.map(({ author, content, id }) => (
             <li key={id}>
               <p>
