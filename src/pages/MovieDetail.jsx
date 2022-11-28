@@ -1,12 +1,18 @@
 import { Box, Container } from 'components/common/shared.styled';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 import { getMovieDetailByID } from 'services/MovieAPI';
+
+const LINKS = [
+  { name: 'Cast', to: 'cast' },
+  { name: 'Reviews', to: 'reviews' },
+];
 
 export function MovieDetail() {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
+  const location = useLocation();
 
   useEffect(() => {
     async function getMovieDetails() {
@@ -36,7 +42,9 @@ export function MovieDetail() {
 
   return (
     <Container>
-      <Box display="flexbox">
+      <Link to={location.state?.from ?? '/'}>Go back</Link>
+      {/* GENERAL INFO */}
+      <Box display="flexbox" mb={3}>
         {' '}
         {poster_path ? (
           <img
@@ -57,6 +65,22 @@ export function MovieDetail() {
           <p>{movieGenresNames}</p>
         </Box>
       </Box>
+
+      {/* ADDITIONAL INFO */}
+      <Box>
+        {' '}
+        <p>Additional info</p>
+        <ul>
+          {LINKS.map(({ to, name }) => (
+            <li key={name}>
+              <Link to={to}>{name}</Link>
+            </li>
+          ))}
+        </ul>
+      </Box>
+
+      {/* CHILDREN */}
+      <Outlet />
     </Container>
   );
 }
