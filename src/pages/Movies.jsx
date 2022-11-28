@@ -8,7 +8,7 @@ import { getMoviesByName } from 'services/MovieAPI';
 
 const SEARCH_QUERY_PARAM_KEY = 'query';
 
-export function Movies() {
+export default function Movies() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [foundedMovies, setFoundedMovies] = useState(null);
   const location = useLocation();

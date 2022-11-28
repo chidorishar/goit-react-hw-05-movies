@@ -6,7 +6,7 @@ import { MoviesList } from 'components/common/MoviesList/MoviesList';
 
 import { getTrendingMovies } from 'services/MovieAPI';
 
-export function Home() {
+export default function Home() {
   const [moviesData, setMoviesData] = useState(null);
   const location = useLocation();
 

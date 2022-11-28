@@ -1,6 +1,7 @@
-import { Box, Container } from 'components/common/shared.styled';
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
+
+import { Box, Container } from 'components/common/shared.styled';
 
 import { getMovieDetailsByID } from 'services/MovieAPI';
 
@@ -9,7 +10,7 @@ const LINKS = [
   { name: 'Reviews', to: 'reviews' },
 ];
 
-export function MovieDetail() {
+export default function MovieDetail() {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const location = useLocation();
@@ -82,7 +83,9 @@ export function MovieDetail() {
       </main>
 
       {/* CHILDREN */}
-      <Outlet />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </Container>
   );
 }

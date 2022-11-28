@@ -1,10 +1,12 @@
-import { Cast } from 'pages/Cast';
-import { Home } from 'pages/Home';
-import { MovieDetail } from 'pages/MovieDetail';
-import { Movies } from 'pages/Movies';
-import { Reviews } from 'pages/Reviews';
+import { lazy } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { SharedLayout } from './SharedLayout/SharedLayout';
+
+const SharedLayout = lazy(() => import('./SharedLayout/SharedLayout'));
+const Home = lazy(() => import('../pages/Home'));
+const Movies = lazy(() => import('pages/Movies'));
+const MovieDetail = lazy(() => import('pages/MovieDetail'));
+const Cast = lazy(() => import('components/Cast/Cast'));
+const Reviews = lazy(() => import('components/Reviews/Reviews'));
 
 export const App = () => {
   return (
@@ -21,11 +23,3 @@ export const App = () => {
     </Routes>
   );
 };
-
-/**
-     '/' - компонент Home, домашняя страница со списком популярных кинофильмов.
-    '/movies' - компонент Movies, страница поиска фильмов по ключевому слову.
-    '/movies/:movieId' - компонент MovieDetails, страница с детальной информацией о кинофильме.
-    /movies/:movieId/cast - компонент Cast, информация о актерском составе. Рендерится на странице MovieDetails.
-    /movies/:movieId/reviews - компонент Reviews, информация об обзорах. Рендерится на странице MovieDetails.
- */

@@ -5,7 +5,7 @@ import { Box, Section } from 'components/common/shared.styled';
 
 import { getMovieCastByID } from 'services/MovieAPI';
 
-export function Cast() {
+export default function Cast() {
   const { movieId } = useParams();
   const [movieCast, setMovieCast] = useState(null);
 
